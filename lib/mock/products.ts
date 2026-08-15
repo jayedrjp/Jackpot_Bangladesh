@@ -916,8 +916,7 @@ export const MOCK_PRODUCTS: Product[] = [
     slug: "crispy-wings",
     description:
       "Crispy Wings \u2014 hand-breaded and cooked to order. Choose 5 or 10 pieces.",
-    shortDescription:
-      "Crispy Wings \u2014 hand-breaded and cooked to order.",
+    shortDescription: "Crispy Wings \u2014 hand-breaded and cooked to order.",
     image: "/images/products/crispy-wings.png",
     gallery: [placeholderFoodImage("Crispy Wings", 600, 450)],
     categoryId: "wings",
@@ -1477,7 +1476,7 @@ export const MOCK_PRODUCTS: Product[] = [
     slug: "cheese",
     description: "Add-on topping: Cheese.",
     shortDescription: "Add-on topping: Cheese.",
-    image: placeholderFoodImage("Cheese", 600, 450),
+    image: "/images/products/cheese.png",
     gallery: [placeholderFoodImage("Cheese", 600, 450)],
     categoryId: "toppings",
     price: 30,
@@ -1572,7 +1571,8 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "chocolate-cold-coffee",
     name: "Chocolate Cold Coffee",
     slug: "chocolate-cold-coffee",
-    description: "Rich chocolate cold coffee, blended smooth. Choose Small or Regular.",
+    description:
+      "Rich chocolate cold coffee, blended smooth. Choose Small or Regular.",
     shortDescription: "Rich chocolate cold coffee, blended smooth.",
     image: "/images/products/drinks3-small.png",
     gallery: [
@@ -1680,7 +1680,8 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "oreo-shake",
     name: "Oreo Shake",
     slug: "oreo-shake",
-    description: "Oreo cookies blended into a creamy shake. Choose Small or Regular.",
+    description:
+      "Oreo cookies blended into a creamy shake. Choose Small or Regular.",
     shortDescription: "Oreo cookies blended into a creamy shake.",
     image: placeholderFoodImage("Oreo Shake", 600, 450),
     gallery: [placeholderFoodImage("Oreo Shake", 600, 450)],
