@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Jackpot Bangladesh brand tokens */
+  --jackpot-red: #e11d24;
+  --jackpot-red-dark: #b0141a;
+  --jackpot-black: #111111;
+  --jackpot-offwhite: #faf7f2;
+  --jackpot-gray: #6b7280;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-jackpot-red: var(--jackpot-red);
+  --color-jackpot-red-dark: var(--jackpot-red-dark);
+  --color-jackpot-black: var(--jackpot-black);
+  --color-jackpot-offwhite: var(--jackpot-offwhite);
+  --color-jackpot-gray: var(--jackpot-gray);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.container-max {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

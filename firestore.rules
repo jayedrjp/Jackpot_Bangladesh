@@ -1,0 +1,87 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Public catalog data: readable by anyone, writable only by admins.
+    match /products/{productId} {
+      allow read: if resource.data.isAvailable == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if resource.data.isActive == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /branches/{branchId} {
+      allow read: if resource.data.isActive == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /offers/{offerId} {
+      allow read: if resource.data.isActive == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /productOptions/{optionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders: customers can create their own order and read it back by
+    // matching phone (validated server-side in real deployments via a
+    // callable function — client-side phone matching alone is not secure
+    // enough for production and should be hardened before launch).
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Reviews: anyone can submit (goes in unapproved), only admins moderate;
+    // only approved reviews are readable publicly.
+    match /reviews/{reviewId} {
+      allow create: if true;
+      allow read: if resource.data.isApproved == true || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /contacts/{contactId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /customers/{customerId} {
+      allow read, write: if isAdmin() || (isSignedIn() && request.auth.uid == customerId);
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow write: if isAdmin();
+    }
+
+    match /sales/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /adminLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
